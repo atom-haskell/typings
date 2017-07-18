@@ -1,11 +1,10 @@
 declare namespace UPI {
-export const TEventRangeType: {
-    context: "context";
-    keyboard: "keyboard";
-    mouse: "mouse";
-    selection: "selection";
-};
-export type TEventRangeType = keyof typeof TEventRangeType;
+export const enum TEventRangeType {
+    context = "context",
+    keyboard = "keyboard",
+    mouse = "mouse",
+    selection = "selection",
+}
 export type TTooltipFunction = (crange: AtomTypes.Range) => ITooltipData | Promise<ITooltipData>;
 export type TRange = AtomTypes.Range | [TPosition, TPosition];
 export type TPosition = AtomTypes.Point | [number, number];
