@@ -15,10 +15,14 @@ export interface IMessageText {
 export interface IMessageHTML {
     html: string;
 }
+export interface IMessageObject {
+  toHtml (linter?: boolean): string
+  raw (): string
+}
 export type TMessage = string | IMessageText | IMessageHTML;
 export interface ITooltipData {
     range: TRange;
-    text: TMessage | TMessage[];
+    text: TSingleOrArray<TMessage | IMessageObject>;
     persistOnCursorMove?: boolean;
 }
 

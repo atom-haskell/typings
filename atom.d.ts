@@ -29,5 +29,3 @@ interface Window {
 }
 
 declare var atom: AtomTypes.AtomEnvironment;
-
-// TODO WorkspaceView is missing in document.
