@@ -3192,7 +3192,7 @@ declare module AtomTypes {
          * @returns {Disposable} Returns a {Disposable} on which `.dispose()` can be called to remove the
         added menu items.
          */
-        add(items: any[]): Disposable;
+        add(items: AtomMenuItem[]): Disposable;
         /**
          * Refreshes the currently visible menu.
          */

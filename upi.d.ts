@@ -22,15 +22,6 @@ export interface ITooltipData {
     persistOnCursorMove?: boolean;
 }
 
-export interface IAtomMenuCommand {
-    label: string;
-    command: string;
-}
-export interface IAtomSubmenu {
-    label: string;
-    submenu: TAtomMenu[];
-}
-export type TAtomMenu = IAtomMenuCommand | IAtomSubmenu;
 export type TSingleOrArray<T> = T | T[];
 export interface ISetTypesParams {
     [severity: string]: ISeverityTabDefinition;
@@ -116,7 +107,7 @@ export interface IParamSpec<T> {
 export type TTooltipHandler = (editor: AtomTypes.TextEditor, crange: AtomTypes.Range, type: TEventRangeType) => ITooltipData | undefined | Promise<ITooltipData | undefined>;
 export interface IRegistrationOptions {
   name: string
-  menu?: {label: string, menu: TAtomMenu}
+  menu?: {label: string, menu: AtomTypes.AtomMenuItem[]}
   messageTypes?: ISetTypesParams
   events?: {
     onWillSaveBuffer?: TSingleOrArray<TTextBufferCallback>
@@ -137,8 +128,8 @@ export interface IShowTooltipParams {
 
 export type IUPIRegistration = (options: IRegistrationOptions) => IUPIInstance
 
-export interface IUPIInstance {
-  setMenu(name: string, menu: TAtomMenu[]): AtomTypes.Disposable;
+export interface IUPIInstance extends AtomTypes.Disposable {
+  setMenu(name: string, menu: AtomTypes.AtomMenuItem[]): AtomTypes.Disposable;
   setStatus(status: IStatus): void;
   setMessages(messages: IResultItem[]): void;
   addMessageTab(name: string, opts: ISeverityTabDefinition): void;
@@ -147,7 +138,7 @@ export interface IUPIInstance {
   addConfigParam(paramName: string, spec: IParamSpec<Object>): AtomTypes.CompositeDisposable;
   getConfigParam(name: string): Promise<Object | undefined>;
   getOthersConfigParam(plugin: string, name: string): Promise<Object | undefined>;
-  setConfigParam(name: string, value: Object): Promise<Object | undefined>;
+  setConfigParam(name: string, value?: Object): Promise<Object | undefined>;
   getEventRange(editor: AtomTypes.TextEditor, typeOrDetail: Object | TEventRangeType): {
       crange: AtomTypes.Range;
       pos: AtomTypes.Point;

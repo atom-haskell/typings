@@ -7,6 +7,15 @@ declare module AtomTypes {
   type WriteStream = any;
   type IPoint = Point | [number, number] | {row: number, column: number}
   type IRange = Range | [IPoint, IPoint]
+  interface AtomMenuCommand {
+      label: string;
+      command: string;
+  }
+  interface AtomSubmenu {
+      label: string;
+      submenu: AtomMenuItem[];
+  }
+  type AtomMenuItem = AtomMenuCommand | AtomSubmenu;
 }
 
 declare module "atom" {
