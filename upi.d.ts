@@ -86,7 +86,7 @@ export interface IParamSpec<T> {
 
   @param value new value of the parameter
   */
-  onChanged (value: T): void
+  onChanged? (value: T): void
   /**
   how an item should be displayed to user
 
@@ -102,7 +102,7 @@ export interface IParamSpec<T> {
 
   @returns plaintext string representing the item
   */
-  displayTemplate (item: T): string
+  displayTemplate (item?: T): string
 }
 export type TTooltipHandler = (editor: AtomTypes.TextEditor, crange: AtomTypes.Range, type: TEventRangeType) => ITooltipData | undefined | Promise<ITooltipData | undefined>;
 export interface IRegistrationOptions {
@@ -134,11 +134,11 @@ export interface IUPIInstance extends AtomTypes.Disposable {
   setMessages(messages: IResultItem[]): void;
   addMessageTab(name: string, opts: ISeverityTabDefinition): void;
   showTooltip({editor, eventType, detail, tooltip}: IShowTooltipParams): void;
-  addPanelControl<T>(def: TControlDefinition<Object>): AtomTypes.Disposable;
-  addConfigParam(paramName: string, spec: IParamSpec<Object>): AtomTypes.CompositeDisposable;
-  getConfigParam(name: string): Promise<Object | undefined>;
-  getOthersConfigParam(plugin: string, name: string): Promise<Object | undefined>;
-  setConfigParam(name: string, value?: Object): Promise<Object | undefined>;
+  addPanelControl<T>(def: TControlDefinition<T>): AtomTypes.Disposable;
+  addConfigParam<T>(paramName: string, spec: IParamSpec<T>): AtomTypes.CompositeDisposable;
+  getConfigParam<T>(name: string): Promise<T | undefined>;
+  getOthersConfigParam<T>(plugin: string, name: string): Promise<T | undefined>;
+  setConfigParam<T>(name: string, value?: T): Promise<T | undefined>;
   getEventRange(editor: AtomTypes.TextEditor, typeOrDetail: Object | TEventRangeType): {
       crange: AtomTypes.Range;
       pos: AtomTypes.Point;

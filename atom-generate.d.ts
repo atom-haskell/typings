@@ -1467,7 +1467,7 @@ declare module AtomTypes {
         /**
          * @returns {boolean} Returns a {Boolean}, always true.
          */
-        isDirectory(): boolean;
+        isDirectory(): this is Directory;
         /**
          * @returns {boolean} Returns a {Boolean} indicating whether or not this is a symbolic link
          */
@@ -1535,7 +1535,7 @@ declare module AtomTypes {
          * Reads file entries in this directory from disk synchronously.
          * @returns {any[]} Returns an {Array} of {File} and {Directory} objects.
          */
-        getEntriesSync(): any[];
+        getEntriesSync(): Array<File | Directory>;
         /**
          * Reads file entries in this directory from disk asynchronously.
          * @param {Function} A {Function} to call with the following arguments:
@@ -2279,7 +2279,7 @@ declare module AtomTypes {
         /**
          * @returns {boolean} Returns a {Boolean}, always true.
          */
-        isFile(): boolean;
+        isFile(): this is File;
         /**
          * @returns {boolean} Returns a {Boolean}, always false.
          */
@@ -3253,36 +3253,36 @@ declare module AtomTypes {
          * @param {string} A {String} message
          * @param {Object} An options {Object} with the following keys:
          */
-        addSuccess(message: string, options?: Object): void;
+        addSuccess(message: string, options?: Object): Notification;
         /**
          * Add an informational notification.
          * @param {string} A {String} message
          * @param {Object} An options {Object} with the following keys:
          */
-        addInfo(message: string, options?: Object): void;
+        addInfo(message: string, options?: Object): Notification;
         /**
          * Add a warning notification.
          * @param {string} A {String} message
          * @param {Object} An options {Object} with the following keys:
          */
-        addWarning(message: string, options?: Object): void;
+        addWarning(message: string, options?: Object): Notification;
         /**
          * Add an error notification.
          * @param {string} A {String} message
          * @param {Object} An options {Object} with the following keys:
          */
-        addError(message: string, options?: Object): void;
+        addError(message: string, options?: Object): Notification;
         /**
          * Add a fatal error notification.
          * @param {string} A {String} message
          * @param {Object} An options {Object} with the following keys:
          */
-        addFatalError(message: string, options?: Object): void;
+        addFatalError(message: string, options?: Object): Notification;
         /**
          * Get all the notifications.
          * @returns {any[]} Returns an {Array} of {Notification}s.
          */
-        getNotifications(): any[];
+        getNotifications(): Notification[];
     }
 
     /**
