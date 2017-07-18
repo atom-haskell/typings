@@ -4,7 +4,6 @@ export const TEventRangeType: {
     keyboard: "keyboard";
     mouse: "mouse";
     selection: "selection";
-    gutter: "gutter";
 };
 export type TEventRangeType = keyof typeof TEventRangeType;
 export type TTooltipFunction = (crange: AtomTypes.Range) => ITooltipData | Promise<ITooltipData>;
@@ -38,8 +37,10 @@ export interface ISetTypesParams {
     [severity: string]: ISeverityTabDefinition;
 }
 export interface ISeverityTabDefinition {
-    uriFilter?: boolean;
-    autoScroll?: boolean;
+  /** should uri filter apply to tab? */
+  uriFilter?: boolean
+  /** should tab auto-scroll? */
+  autoScroll?: boolean
 }
 export type TTextBufferCallback = (buffer: AtomTypes.TextBuffer) => void;
 export interface IControlSimpleDefinition {
@@ -57,52 +58,76 @@ export interface IElementObject<T> {
     update(props: T): Promise<void>;
 }
 export interface IControlOpts {
-    id?: string;
-    events?: {
-        [key: string]: EventListener;
-    };
-    classes?: string[];
-    style?: {
-        [key: string]: string;
-    };
-    attrs?: {
-        [key: string]: string;
-    };
+  /** element `id` */
+  id?: string
+  /** event callbacks, key is event name, e.g. "click" */
+  events?: {[key: string]: EventListener}
+  /** additional classes to set on element */
+  classes?: string[]
+  /** css attributes to set on element */
+  style?: {[key: string]: string}
+  /** html attributes to set on element */
+  attrs?: {[key: string]: string}
 }
 export type TControlDefinition<T> = IControlCustomDefinition<T> | IControlSimpleDefinition;
 export interface IParamSpec<T> {
-    onChanged: (value: T) => void;
-    items: T[] | Promise<T[]> | (() => T[] | Promise<T[]>);
-    itemTemplate: (item: T) => string;
-    itemFilterKey: string;
-    description?: string;
-    displayName?: string;
-    displayTemplate: (item: T) => string;
-    default: T;
+  /**
+  name of item key that the filter in select dialog will match
+  */
+  itemFilterKey: string
+  /**
+  this will be displayed in the heading of select dialog
+  */
+  description?: string
+  /**
+  display name of the parameter in output panel
+  */
+  displayName?: string
+  /**
+  default value
+  */
+  default?: T
+  /**
+  possible values of the parameter. can be a callback.
+  */
+  items: T[] | Promise<T[]> | (() => T[] | Promise<T[]>)
+  /**
+  will be called whenever the value of parameter changes
+
+  @param value new value of the parameter
+  */
+  onChanged (value: T): void
+  /**
+  how an item should be displayed to user
+
+  @param item item to be displayed
+
+  @returns HTML string representing the item
+  */
+  itemTemplate (item: T): string
+  /**
+  template for displaying value of parameter in output panel
+
+  @param item item to be displayed
+
+  @returns plaintext string representing the item
+  */
+  displayTemplate (item: T): string
 }
 export type TTooltipHandler = (editor: AtomTypes.TextEditor, crange: AtomTypes.Range, type: TEventRangeType) => ITooltipData | undefined | Promise<ITooltipData | undefined>;
 export interface IRegistrationOptions {
-    name: string;
-    menu?: {
-        label: string;
-        menu: TAtomMenu;
-    };
-    messageTypes?: ISetTypesParams;
-    events?: {
-        onWillSaveBuffer?: TSingleOrArray<TTextBufferCallback>;
-        onDidSaveBuffer?: TSingleOrArray<TTextBufferCallback>;
-        onDidStopChanging?: TSingleOrArray<TTextBufferCallback>;
-    };
-    controls?: Array<TControlDefinition<Object>>;
-    params?: {
-        [paramName: string]: IParamSpec<Object>;
-    };
-    tooltip?: TTooltipHandler | {
-        priority?: number;
-        handler: TTooltipHandler;
-    };
+  name: string
+  menu?: {label: string, menu: TAtomMenu}
+  messageTypes?: ISetTypesParams
+  events?: {
+    onWillSaveBuffer?: TSingleOrArray<TTextBufferCallback>
+    onDidSaveBuffer?: TSingleOrArray<TTextBufferCallback>
+    onDidStopChanging?: TSingleOrArray<TTextBufferCallback>
+  }
+  controls?: Array<TControlDefinition<Object>>
+  params?: {[paramName: string]: IParamSpec<Object>}
+  tooltip?: TTooltipHandler | {priority?: number, handler: TTooltipHandler, eventTypes?: TEventRangeType[]}
 }
-
 
 export interface IShowTooltipParams {
     editor: AtomTypes.TextEditor;
@@ -132,20 +157,31 @@ export interface IUPIInstance {
   dispose(): void;
 }
 export interface IResultItem {
-    uri?: string;
-    position?: TPosition;
-    message: TMessage;
-    severity: TSeverity;
+  /** File URI message relates to */
+  uri?: string
+  /** position to which message relates */
+  position?: TPosition
+  /** message itself */
+  message: TMessage
+  /** message severity, will be shown in corresponding tab */
+  severity: TSeverity
+  /** any context related to message, will be displayed alongside
+      uri and position */
+  context?: string
 }
 export type TSeverity = 'error' | 'warning' | 'lint' | string;
 export interface INormalStatus {
-    status: 'ready' | 'error' | 'warning';
+  status: 'ready' | 'error' | 'warning'
 }
+
 export interface IProgressStatus {
-    status: 'progress';
-    progress?: number;
+  status: 'progress'
+  /**
+  float between 0 and 1, only relevant when status is 'progress'
+  if 0 or undefined, progress bar is not shown
+  */
+  progress?: number
 }
-export type IStatus = (INormalStatus | IProgressStatus) & {
-    detail: string;
-};
+
+export type IStatus = (INormalStatus | IProgressStatus) & {detail: string}
 }
