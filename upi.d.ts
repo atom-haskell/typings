@@ -145,8 +145,8 @@ export interface IUPIInstance {
   showTooltip({editor, eventType, detail, tooltip}: IShowTooltipParams): void;
   addPanelControl<T>(def: TControlDefinition<Object>): AtomTypes.Disposable;
   addConfigParam(paramName: string, spec: IParamSpec<Object>): AtomTypes.CompositeDisposable;
-  getConfigParam(name: string): Promise<Object>;
-  getOthersConfigParam(plugin: string, name: string): Promise<Object>;
+  getConfigParam(name: string): Promise<Object | undefined>;
+  getOthersConfigParam(plugin: string, name: string): Promise<Object | undefined>;
   setConfigParam(name: string, value: Object): Promise<Object | undefined>;
   getEventRange(editor: AtomTypes.TextEditor, typeOrDetail: Object | TEventRangeType): {
       crange: AtomTypes.Range;
