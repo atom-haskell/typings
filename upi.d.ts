@@ -42,12 +42,11 @@ export interface IControlSimpleDefinition {
     opts: IControlOpts;
 }
 export interface IControlCustomDefinition<T> {
-    element: {
-        new (arg: T): IElementObject<T>;
-    };
+    element: new (arg: T) => IElementObject<T>;
     opts: T;
 }
 export interface IElementObject<T> {
+    props: T
     element: HTMLElement;
     update(props: T): Promise<void>;
 }
