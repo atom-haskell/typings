@@ -5,7 +5,7 @@ declare module 'promise-queue' {
 }
 
 declare class Queue {
-    constructor(maxPendingPromises: number, maxQueuedPromises: number);
+    constructor(maxPendingPromises: number, maxQueuedPromises?: number);
 
     add<T>(promiseGenerator: () => Promise<T>): Promise<T>;
 

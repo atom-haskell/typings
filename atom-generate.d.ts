@@ -6,7 +6,7 @@ declare module AtomTypes {
      *
      * file: src/atom-environment.coffee
      */
-    class AtomEnvironment {
+    interface AtomEnvironment {
         /**
          * A {CommandRegistry} instance
          */
@@ -2292,7 +2292,7 @@ declare module AtomTypes {
          * @returns {boolean} Returns a promise that resolves to a {Boolean}, true if the file
         exists, false otherwise.
          */
-        exists(): boolean;
+        exists(): Promise<boolean>
         /**
          * @returns {boolean} Returns a {Boolean}, true if the file exists, false otherwise.
          */
@@ -4151,7 +4151,7 @@ declare module AtomTypes {
         /**
          * @returns  Returns an array of all rows in the range.
          */
-        getRows(): any;
+        getRows(): number[];
         /**
          * Freezes the range and its start and end point so it becomes
          * immutable and returns itself.
@@ -4272,7 +4272,7 @@ declare module AtomTypes {
         /**
          * @returns {any[]} Returns an {Array} of {String}s
          */
-        getScopesArray(): any[];
+        getScopesArray(): string[];
     }
 
     /**
@@ -5051,7 +5051,7 @@ declare module AtomTypes {
          * @param {number} A {Number} representing a 0-indexed row.
          * @returns {string} Returns a {String}.
          */
-        lineForRow(row: number): string;
+        lineForRow(row: number): string | undefined;
         /**
          * Get the line ending for the given 0-indexed row.
          * @param {number} A {Number} indicating the row.
@@ -5286,8 +5286,8 @@ declare module AtomTypes {
          * @param {Object} {Object}
          * @param {Function} A {Function} that's called on each match with an {Object} containing the following keys:
          */
-        scan(regex: RegExp, options: Object, iterator: Function): void;
-        scan(regex: RegExp, iterator: Function): void;
+        scan(regex: RegExp, options: Object, iterator: IteratorFunction): void;
+        scan(regex: RegExp, iterator: IteratorFunction): void;
         /**
          * Scan regular expression matches in the entire buffer in reverse
          * order, calling the given iterator function on each match.
@@ -5295,8 +5295,8 @@ declare module AtomTypes {
          * @param {Object} {Object}
          * @param {Function} A {Function} that's called on each match with an {Object} containing the following keys:
          */
-        backwardsScan(regex: RegExp, iterator: Function): void;
-        backwardsScan(regex: RegExp, options: Object, iterator: Function): void;
+        backwardsScan(regex: RegExp, iterator: IteratorFunction): void;
+        backwardsScan(regex: RegExp, options: Object, iterator: IteratorFunction): void;
         /**
          * Scan regular expression matches in a given range , calling the given
          * iterator function on each match.
@@ -5305,8 +5305,8 @@ declare module AtomTypes {
          * @param {Object} {Object}
          * @param {Function} A {Function} that's called on each match with an {Object} containing the following keys:
          */
-        scanInRange(regex: RegExp, range: IRange, callback: Function): void;
-        scanInRange(regex: RegExp, range: IRange, options: Object, callback: Function): void;
+        scanInRange(regex: RegExp, range: IRange, callback: IteratorFunction): void;
+        scanInRange(regex: RegExp, range: IRange, options: Object, callback: IteratorFunction): void;
         /**
          * Scan regular expression matches in a given range in reverse order,
          * calling the given iterator function on each match.
@@ -5315,8 +5315,8 @@ declare module AtomTypes {
          * @param {Object} {Object}
          * @param {Function} A {Function} that's called on each match with an {Object} containing the following keys:
          */
-        backwardsScanInRange(regex: RegExp, range: IRange, iterator: Function): void;
-        backwardsScanInRange(regex: RegExp, range: IRange, options: Object, iterator: Function): void;
+        backwardsScanInRange(regex: RegExp, range: IRange, iterator: IteratorFunction): void;
+        backwardsScanInRange(regex: RegExp, range: IRange, options: Object, iterator: IteratorFunction): void;
         /**
          * Replace all regular expression matches in the entire buffer.
          * @param {RegExp} A {RegExp} representing the matches to be replaced.
@@ -5361,7 +5361,7 @@ declare module AtomTypes {
          * @param {boolean} A {Boolean} indicating whether or not to include the newline, which results in a range that extends to the start of the next line.
          * @returns {Range} Returns a {Range}.
          */
-        rangeForRow(row: number, includeNewline: boolean): Range;
+        rangeForRow(row: number, includeNewline?: boolean): Range;
         /**
          * Convert a position in the buffer in row/column coordinates to an
          * absolute character offset, inclusive of line ending characters.

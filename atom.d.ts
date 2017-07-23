@@ -16,6 +16,19 @@ declare module AtomTypes {
       submenu: AtomMenuItem[];
   }
   type AtomMenuItem = AtomMenuCommand | AtomSubmenu;
+  interface IteratorArgs {
+    match: RegExpMatchArray
+    matchText: string
+    range: Range
+    stop(): void
+    replace(arg: string): void
+    leadingContextLines: string[]
+    trailingContextLines: string[]
+  }
+  type IteratorFunction = (args: IteratorArgs) => void;
+  interface AtomEnvironment {
+    getConfigDirPath(): string
+  }
 }
 
 declare module "atom" {
