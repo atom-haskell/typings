@@ -1,6 +1,5 @@
-import { Disposable } from 'atom';
-import { IImport } from 'atom-haskell-utils';
-export { IImport };
+declare namespace UPI {
+export namespace CompletionBackend {
 export type SymbolType = 'type' | 'class' | 'function' | 'operator' | 'tag'
 export interface ISymbol {
     qparent: string | undefined;
@@ -8,12 +7,20 @@ export interface ISymbol {
     name: string;
     typeSignature: string | undefined;
     symbolType: SymbolType;
-    module: IImport;
+    module: {
+      name: string;
+      qualified: boolean;
+      hiding: boolean;
+      importList: null | Array<string | {
+          parent: string;
+      }>;
+      alias: null | string;
+    }
 }
 export interface ICompletionBackend {
     name(): string;
-    onDidDestroy(callback: () => void): Disposable | undefined;
-    registerCompletionBuffer(buffer: AtomTypes.TextBuffer): Disposable;
+    onDidDestroy(callback: () => void): AtomTypes.Disposable;
+    registerCompletionBuffer(buffer: AtomTypes.TextBuffer): AtomTypes.Disposable;
     unregisterCompletionBuffer(buffer: AtomTypes.TextBuffer): void;
     getCompletionsForSymbol(buffer: AtomTypes.TextBuffer, prefix: string, position: AtomTypes.Point): Promise<ISymbol[]>;
     getCompletionsForType(buffer: AtomTypes.TextBuffer, prefix: string, position: AtomTypes.Point): Promise<ISymbol[]>;
@@ -25,4 +32,6 @@ export interface ICompletionBackend {
     getCompletionsForLanguagePragmas(buffer: AtomTypes.TextBuffer, prefix: string, position: AtomTypes.Point): Promise<string[]>;
     getCompletionsForCompilerOptions(buffer: AtomTypes.TextBuffer, prefix: string, position: AtomTypes.Point): Promise<string[]>;
     getCompletionsForHole(buffer: AtomTypes.TextBuffer, prefix: string, position: AtomTypes.Point): Promise<ISymbol[]>;
+}
+}
 }
