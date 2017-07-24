@@ -23,7 +23,7 @@ export type TMessage = string | IMessageText | IMessageHTML;
 export interface ITooltipData {
     range: TRange;
     text: TSingleOrArray<TMessage | IMessageObject>;
-    persistOnCursorMove?: boolean;
+    persistent?: boolean;
 }
 
 export type TSingleOrArray<T> = T | T[];
