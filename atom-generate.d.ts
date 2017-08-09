@@ -7378,7 +7378,7 @@ declare module AtomTypes {
          * @returns {TextEditor} Returns a {TextEditor} or `` if the workspace center's current
         active item is not a {TextEditor}.
          */
-        getActiveTextEditor(): TextEditor;
+        getActiveTextEditor(): TextEditor | undefined;
         /**
          * Get the most recently focused pane container.
          * @returns {Dock} Returns a {Dock} or the {WorkspaceCenter}.
