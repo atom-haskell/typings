@@ -38,6 +38,9 @@ declare module AtomTypes {
       on<K extends keyof EmitterArgMap> (eventName: K, handler: (arg: EmitterArgMap[K]) => void): AtomTypes.Disposable
       emit<K extends keyof EmitterArgMap> (eventName: K, value: EmitterArgMap[K]): void
   }
+  export interface IDisposable {
+    dispose(): any
+  }
 }
 
 declare module "atom" {
