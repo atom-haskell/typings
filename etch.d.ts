@@ -110,7 +110,7 @@ interface HTMLAttributes {
     srcSet?: string;
     start?: number;
     step?: number | string;
-    style?: { [propName: string]: string };
+    style?: { [propName: string]: string | undefined };
     summary?: string;
     tabIndex?: string;
     target?: string;
@@ -151,12 +151,14 @@ interface EtchAttributes extends HTMLAttributes {
   ref?: string
   className?: string
   on?: {
-    click: (e: MouseEvent) => any
+    click?: (e: MouseEvent) => any
+    [name: string]: ((e: any) => any) | undefined
   }
   dataset?: {
     [propName: string]: string | number
   }
   innerHTML?: string
+  innerText?: string
   key?: any
 }
 
@@ -217,7 +219,7 @@ declare module "etch" {
   export function dom<T extends JSX.ElementClass>(tag: ElementClassConstructor<T>, props: T['props'], ...children: ChildSpec[]): JSX.Element;
   export function getScheduler(): any;
   export function initialize(component: any): void;
-  export function render(virtualNode: any, options: any): Node;
+  export function render(virtualNode: JSX.Element, options?: any): Node;
   export function setScheduler(customScheduler: any): void;
   export function update(component: any, replaceNode?: boolean): Promise<void>;
   export function updateSync(component: any, replaceNode?: boolean): void;
