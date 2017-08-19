@@ -41,6 +41,13 @@ declare module AtomTypes {
   export interface IDisposable {
     dispose(): any
   }
+  export type IteratorCallback = (arg: {
+    match: RegExpMatchArray
+    matchText: string
+    range: Range
+    stop: () => void
+    replace: (replacement: string) => void
+  }) => void
 }
 
 declare module "atom" {

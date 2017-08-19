@@ -4866,7 +4866,7 @@ declare module AtomTypes {
          * @param {Function} {Function} to be called when a transaction in which textual changes occurred is completed.
          * @returns {Disposable} Returns a {Disposable} on which `.dispose()` can be called to unsubscribe.
          */
-        onDidChangeText(callback: Function): Disposable;
+        onDidChangeText(callback: (event: {changes: Array<{oldRange: Range, newRange: Range, oldText: string, newText: string}>}) => void): Disposable;
         /**
          * Invoke the given callback asynchronously following one or more
          * changes after {::getStoppedChangingDelay} milliseconds elapse without an
@@ -6630,7 +6630,7 @@ declare module AtomTypes {
          * @param {Function} A {Function} that's called on each match
          */
         scan(regex: RegExp, iterator: Function): void;
-        scan(regex: RegExp, options: Object, iterator: Function): void;
+        scan(regex: RegExp, options: Object, iterator: IteratorCallback): void;
         /**
          * Scan regular expression matches in a given range, calling the given
          * iterator function on each match.
@@ -6638,7 +6638,7 @@ declare module AtomTypes {
          * @param {Range} A {Range} in which to search.
          * @param {Function} A {Function} that's called on each match with an {Object} containing the following keys:
          */
-        scanInBufferRange(regex: RegExp, range: IRange, iterator: Function): void;
+        scanInBufferRange(regex: RegExp, range: IRange, iterator: IteratorCallback): void;
         /**
          * Scan regular expression matches in a given range in reverse order,
          * calling the given iterator function on each match.
@@ -6646,7 +6646,7 @@ declare module AtomTypes {
          * @param {Range} A {Range} in which to search.
          * @param {Function} A {Function} that's called on each match with an {Object} containing the following keys:
          */
-        backwardsScanInBufferRange(regex: RegExp, range: IRange, iterator: Function): void;
+        backwardsScanInBufferRange(regex: RegExp, range: IRange, iterator: IteratorCallback): void;
         /**
          * @returns {boolean} Returns a {Boolean} indicating whether softTabs are enabled for this
         editor.
