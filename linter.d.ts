@@ -7,6 +7,15 @@ declare module Linter {
     lint(textEditor: AtomTypes.TextEditor): Maybe<Array<Message>> | Promise<Maybe<Array<Message>>>,
   };
 
+  type StandardLinterV2 = {
+    name: string,
+    scope: 'file' | 'project',
+    lintsOnChange: boolean,
+    grammarScopes: Array<string>,
+    lint(textEditor: AtomTypes.TextEditor):
+      Maybe<Array<V2Message | Message>> | Promise<Maybe<Array<V2Message | Message>>>,
+  }
+
   export type Message = {
     type: string,
     text?: string,
@@ -33,13 +42,13 @@ declare module Linter {
     // WARNING: There is NO replacement for this in v2
     filePath?: string,
     // ^ MUST be an absolute path (relative paths are not supported)
-    range?: Range,
+    range?: AtomTypes.IRange,
     class?: string,
     severity?: 'error' | 'warning' | 'info',
   };
 
   export type Fix = {
-    range: Range,
+    range: AtomTypes.IRange,
     newText: string,
     oldText?: string,
   };
@@ -74,7 +83,7 @@ declare module Linter {
     location: {
       file: string,
       // ^ MUST be an absolute path (relative paths are not supported)
-      position: Range,
+      position: AtomTypes.IRange,
     },
     // ^ Location of the issue (aka where to highlight)
     reference?: {
@@ -93,13 +102,13 @@ declare module Linter {
     // ^ Severity of error
     solutions?: Array<{
       title?: string,
-      position: Range,
+      position: AtomTypes.IRange,
       priority?: number,
       currentText?: string,
       replaceWith: string,
     } | {
       title?: string,
-      position: Range,
+      position: AtomTypes.IRange,
       priority?: number,
       apply: (() => any),
     }>,
