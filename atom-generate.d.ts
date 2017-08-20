@@ -3409,7 +3409,7 @@ declare module AtomTypes {
          * @param {string} The {String} package name.
          * @returns {Package} Returns the {Package} that was enabled or null if it isn't loaded.
          */
-        enablePackage(name: string): Package;
+        enablePackage(name: string): Package | null;
         /**
          * Disable the package with the given name.
          * @param {string} The {String} package name.
@@ -3425,13 +3425,13 @@ declare module AtomTypes {
         /**
          * Get an {Array} of all the active {Package}s.
          */
-        getActivePackages(): void;
+        getActivePackages(): Package[];
         /**
          * Get the active {Package} with the given name.
          * @param {string} The {String} package name.
          * @returns {Package} Returns a {Package} or .
          */
-        getActivePackage(name: string): Package;
+        getActivePackage(name: string): Package | undefined;
         /**
          * Is the {Package} with the given name active?
          * @param {string} The {String} package name.
@@ -3445,13 +3445,13 @@ declare module AtomTypes {
         /**
          * Get an {Array} of all the loaded {Package}s
          */
-        getLoadedPackages(): void;
+        getLoadedPackages(): Package[];
         /**
          * Get the loaded {Package} with the given name.
          * @param {string} The {String} package name.
          * @returns {Package} Returns a {Package} or .
          */
-        getLoadedPackage(name: string): Package;
+        getLoadedPackage(name: string): Package | undefined;
         /**
          * Is the package with the given name loaded?
          * @param {string} The {String} package name.
