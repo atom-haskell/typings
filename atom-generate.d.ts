@@ -3474,6 +3474,8 @@ declare module AtomTypes {
          * @returns {any[]} Returns an {Array} of {String}s of all the available package metadata.
          */
         getAvailablePackageMetadata(): any[];
+
+        activatePackage(package: string): Promise<Package>
     }
 
     /**
