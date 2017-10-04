@@ -868,8 +868,8 @@ declare module AtomTypes {
          * @returns {Disposable} Returns a {Disposable} with the following keys on which you can call
         `.dispose()` to unsubscribe.
          */
-        observe(keyPath: string, callback: (value: Object) => void): Disposable;
-        observe(keyPath: string, options: Object, callback: (value: Object) => void): Disposable;
+        observe<K extends keyof ConfigInterface>(keyPath: K, callback: (value: ConfigInterface[K]) => void): Disposable;
+        observe<K extends keyof ConfigInterface>(keyPath: K, options: {scope: ScopeDescriptor}, callback: (value: ConfigInterface[K]) => void): Disposable;
         /**
          * Add a listener for changes to a given key path. If `keyPath` is
          * not specified, your callback will be called on changes to any key.
@@ -879,9 +879,9 @@ declare module AtomTypes {
          * @returns {Disposable} Returns a {Disposable} with the following keys on which you can call
         `.dispose()` to unsubscribe.
          */
-         onDidChange(callback: (event: {newValue: Object, oldValue: Object}) => void): Disposable;
-         onDidChange(keyPath: string, callback: (event: {newValue: Object, oldValue: Object}) => void): Disposable;
-         onDidChange(keyPath: string, options: {scope: ScopeDescriptor}, callback: (event: {newValue: Object, oldValue: Object}) => void): Disposable;
+         onDidChange<K extends keyof ConfigInterface>(callback: (event: {newValue: ConfigInterface[K], oldValue: ConfigInterface[K]}) => void): Disposable;
+         onDidChange<K extends keyof ConfigInterface>(keyPath: K, callback: (event: {newValue: ConfigInterface[K], oldValue: ConfigInterface[K]}) => void): Disposable;
+         onDidChange<K extends keyof ConfigInterface>(keyPath: K, options: {scope: ScopeDescriptor}, callback: (event: {newValue: ConfigInterface[K], oldValue: ConfigInterface[K]}) => void): Disposable;
         /**
          * Retrieves the setting for the given key.
          *
@@ -927,7 +927,7 @@ declare module AtomTypes {
          * @returns  Returns the value from Atom's default settings, the user's configuration
         file in the type specified by the configuration schema.
          */
-        get(keyPath: string, options?: {scope?: ScopeDescriptor, sources?: string[], excludeSources?: string[]}): any;
+        get<K extends keyof ConfigInterface>(keyPath: K, options?: {scope?: ScopeDescriptor, sources?: string[], excludeSources?: string[]}): ConfigInterface[K];
         /**
          * Get all of the values for the given key-path, along with their
          * associated scope selector.
@@ -976,18 +976,18 @@ declare module AtomTypes {
         * `true` if the value was set.
         * `false` if the value was not able to be coerced to the type specified in the setting's schema.
          */
-        set(keyPath: string, value: any, options?: Object): boolean;
+        set<K extends keyof ConfigInterface>(keyPath: K, value: ConfigInterface[K], options?: Object): boolean;
         /**
          * Restore the setting at `keyPath` to its default value.
          * @param {string} The {String} name of the key.
          * @param {Object} {Object}
          */
-        unset(keyPath: string, options?: Object): void;
+        unset<K extends keyof ConfigInterface>(keyPath: K, options?: Object): void;
         /**
          * Get an {Array} of all of the `source` {String}s with which
          * settings have been added via {::set}.
          */
-        getSources(): void;
+        getSources(): string[];
         /**
          * Retrieve the schema for a specific key path. The schema will tell
          * you what type the keyPath expects, and other metadata about the config
@@ -997,11 +997,11 @@ declare module AtomTypes {
          * @returns  Returns `null` when the keyPath has no schema specified, but is accessible
         from the root schema.
          */
-        getSchema(keyPath: string): Object;
+        getSchema<K extends keyof ConfigInterface>(keyPath: K): Object;
         /**
          * Get the {String} path to the config file being used.
          */
-        getUserConfigPath(): void;
+        getUserConfigPath(): string;
         /**
          * Suppress calls to handler functions registered with {::onDidChange}
          * and {::observe} for the duration of `callback`. After `callback` executes,
