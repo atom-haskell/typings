@@ -49,6 +49,61 @@ declare module AtomTypes {
     replace: (replacement: string) => void
   }) => void
   interface ConfigInterface {
+    'editor.commentStart': string | null
+    'editor.commentEnd': string | null
+    'editor.increaseIndentPattern': string | null
+    'editor.decreaseIndentPattern': string | null
+    'editor.foldEndPattern': string | null
+    'editor.fontFamily': string
+    'editor.fontSize': number
+    'editor.lineHeight': string | number
+    'editor.showCursorOnSelection': boolean
+    'editor.showInvisibles': boolean
+    'editor.showIndentGuide': boolean
+    'editor.showLineNumbers': boolean
+    'editor.atomicSoftTabs': boolean
+    'editor.autoIndent': boolean
+    'editor.autoIndentOnPaste': boolean
+    'editor.nonWordCharacters': string
+    'editor.preferredLineLength': number
+    'editor.tabLength': number
+    'editor.softWrap': boolean
+    'editor.softTabs': boolean
+    'editor.tabType': 'auto' | 'soft' | 'hard'
+    'editor.softWrapAtPreferredLineLength': boolean
+    'editor.softWrapHangingIndent': number
+    'editor.scrollSensitivity': number
+    'editor.scrollPastEnd': boolean
+    'editor.undoGroupingInterval': number
+    'editor.confirmCheckoutHeadRevision': boolean
+    'editor.invisibles': {
+      eol: boolean | string
+      space: boolean | string
+      tab: boolean | string
+      cr: boolean | string
+    }
+    'editor.zoomFontWhenCtrlScrolling': boolean
+    'autocomplete-plus.enableAutoActivation': boolean
+    'autocomplete-plus.autoActivationDelay': number
+    'autocomplete-plus.maxVisibleSuggestions': number
+    'autocomplete-plus.confirmCompletion': 'tab' | 'enter' | 'tab and enter' | 'tab always, enter when suggestion explicitly selected'
+    'autocomplete-plus.useCoreMovementCommands': boolean
+    'autocomplete-plus.fileBlacklist': Array<string>
+    'autocomplete-plus.scopeBlacklist': Array<string>
+    'autocomplete-plus.includeCompletionsFromAllBuffers': boolean
+    'autocomplete-plus.strictMatching': boolean
+    'autocomplete-plus.minimumWordLength': number
+    'autocomplete-plus.enableBuiltinProvider': boolean
+    'autocomplete-plus.builtinProviderBlacklist': string
+    'autocomplete-plus.backspaceTriggersAutocomplete': boolean
+    'autocomplete-plus.enableAutoConfirmSingleSuggestion': boolean
+    'autocomplete-plus.suggestionListFollows': 'Word' | 'Cursor'
+    'autocomplete-plus.defaultProvider': 'Fuzzy' | 'Symbol'
+    'autocomplete-plus.suppressActivationForEditorClasses': Array<string>
+    'autocomplete-plus.consumeSuffix': boolean
+    'autocomplete-plus.useAlternateScoring': boolean
+    'autocomplete-plus.useLocalityBonus': boolean
+    'autocomplete-plus.enableExtendedUnicodeSupport': boolean
   }
 }
 

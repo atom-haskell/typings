@@ -997,7 +997,7 @@ declare module AtomTypes {
          * @returns  Returns `null` when the keyPath has no schema specified, but is accessible
         from the root schema.
          */
-        getSchema<K extends keyof ConfigInterface>(keyPath: K): Object;
+        getSchema<K extends keyof ConfigInterface>(keyPath: K): any;
         /**
          * Get the {String} path to the config file being used.
          */
