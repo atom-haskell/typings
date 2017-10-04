@@ -927,7 +927,7 @@ declare module AtomTypes {
          * @returns  Returns the value from Atom's default settings, the user's configuration
         file in the type specified by the configuration schema.
          */
-        get(keyPath: string, options?: Object): any;
+        get(keyPath: string, options?: {scope?: ScopeDescriptor, sources?: string[], excludeSources?: string[]}): any;
         /**
          * Get all of the values for the given key-path, along with their
          * associated scope selector.
