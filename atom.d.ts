@@ -48,6 +48,8 @@ declare module AtomTypes {
     stop: () => void
     replace: (replacement: string) => void
   }) => void
+  interface ConfigInterface {
+  }
 }
 
 declare module "atom" {
