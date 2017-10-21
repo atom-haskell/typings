@@ -4041,7 +4041,7 @@ declare module AtomTypes {
          * Get an {Array} of {String}s containing the paths of the project's
          * directories.
          */
-        getPaths(): void;
+        getPaths(): string[];
         /**
          * Set the paths of the project's directories.
          * @param {any[]} {Array} of {String} paths.
