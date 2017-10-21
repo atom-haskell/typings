@@ -4164,7 +4164,7 @@ declare module AtomTypes {
          * @param {Range} A {Range} or range-compatible {Array}
          * @returns  Returns a new range that contains this range and the given range.
          */
-        union(otherRange: IRange): any;
+        union(otherRange: IRange): Range;
         /**
          * Build and return a new range by translating this range's start and
          * end points by the given delta(s).
