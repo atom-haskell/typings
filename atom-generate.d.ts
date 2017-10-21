@@ -1092,40 +1092,40 @@ declare module AtomTypes {
          * @param {any[]} {Array} of two numbers: the buffer row, and the buffer column.
          * @param {Object} {Object} with the following keys:
          */
-        setBufferPosition(bufferPosition: any[], options?: Object): void;
+        setBufferPosition(bufferPosition: [number, number], options?: Object): void;
         /**
          * @returns  Returns the current buffer position as an Array.
          */
-        getBufferPosition(): any;
+        getBufferPosition(): Point;
         /**
          * @returns  Returns the cursor's current screen row.
          */
-        getScreenRow(): any;
+        getScreenRow(): number;
         /**
          * @returns  Returns the cursor's current screen column.
          */
-        getScreenColumn(): any;
+        getScreenColumn(): number;
         /**
          * Retrieves the cursor's current buffer row.
          */
-        getBufferRow(): void;
+        getBufferRow(): number;
         /**
          * @returns  Returns the cursor's current buffer column.
          */
-        getBufferColumn(): any;
+        getBufferColumn(): number;
         /**
          * @returns  Returns the cursor's current buffer row of text excluding its line
         ending.
          */
-        getCurrentBufferLine(): any;
+        getCurrentBufferLine(): number;
         /**
          * @returns  Returns whether the cursor is at the start of a line.
          */
-        isAtBeginningOfLine(): any;
+        isAtBeginningOfLine(): boolean;
         /**
          * @returns  Returns whether the cursor is on the line return character.
          */
-        isAtEndOfLine(): any;
+        isAtEndOfLine(): boolean;
         /**
          * @returns {DisplayMarker} Returns the underlying {DisplayMarker} for the cursor.
         Useful with overlay {Decoration}s.
@@ -3817,7 +3817,7 @@ declare module AtomTypes {
      *
      * file: src/panel.js
      */
-    class Panel {
+    class Panel<T> {
         /**
          * Destroy and remove this panel from the UI.
          */
@@ -3835,11 +3835,11 @@ declare module AtomTypes {
          * @param {Panel} {Panel} this panel
          * @returns {Disposable} Returns a {Disposable} on which `.dispose()` can be called to unsubscribe.
          */
-        onDidDestroy(callback: (panel: Panel) => void): Disposable;
+        onDidDestroy(callback: (panel: Panel<T>) => void): Disposable;
         /**
          * @returns  Returns the panel's item.
          */
-        getItem(): any;
+        getItem(): T;
         /**
          * @returns {number} Returns a {Number} indicating this panel's priority.
          */
@@ -7459,7 +7459,7 @@ declare module AtomTypes {
          * @param {number} {Number} Determines stacking order. Lower priority items are forced closer to the edges of the window. (default: 100)
          * @returns {Panel} Returns a {Panel}
          */
-        addBottomPanel(options: { item: any, visible?: boolean, priority?: number }): Panel;
+        addBottomPanel<T>(options: { item: T, visible?: boolean, priority?: number }): Panel<T>;
         /**
          * Get an {Array} of all the panel items to the left of the editor window.
          */
@@ -7472,7 +7472,7 @@ declare module AtomTypes {
          * @param {number} {Number} Determines stacking order. Lower priority items are forced closer to the edges of the window. (default: 100)
          * @returns {Panel} Returns a {Panel}
          */
-        addLeftPanel(options: { item: any, visible?: boolean, priority?: number }): Panel;
+        addLeftPanel<T>(options: { item: T, visible?: boolean, priority?: number }): Panel<T>;
         /**
          * Get an {Array} of all the panel items to the right of the editor window.
          */
@@ -7485,7 +7485,7 @@ declare module AtomTypes {
          * @param {number} {Number} Determines stacking order. Lower priority items are forced closer to the edges of the window. (default: 100)
          * @returns {Panel} Returns a {Panel}
          */
-        addRightPanel(options: { item: any, visible?: boolean, priority?: number }): Panel;
+        addRightPanel<T>(options: { item: T, visible?: boolean, priority?: number }): Panel<T>;
         /**
          * Get an {Array} of all the panel items at the top of the editor window.
          */
@@ -7498,7 +7498,7 @@ declare module AtomTypes {
          * @param {number} {Number} Determines stacking order. Lower priority items are forced closer to the edges of the window. (default: 100)
          * @returns {Panel} Returns a {Panel}
          */
-        addTopPanel(options: { item: any, visible?: boolean, priority?: number }): Panel;
+        addTopPanel<T>(options: { item: T, visible?: boolean, priority?: number }): Panel<T>;
         /**
          * Get an {Array} of all the panel items in the header.
          */
@@ -7511,7 +7511,7 @@ declare module AtomTypes {
          * @param {number} {Number} Determines stacking order. Lower priority items are forced closer to the edges of the window. (default: 100)
          * @returns {Panel} Returns a {Panel}
          */
-        addHeaderPanel(options: { item: any, visible?: boolean, priority?: number }): Panel;
+        addHeaderPanel<T>(options: { item: T, visible?: boolean, priority?: number }): Panel<T>;
         /**
          * Get an {Array} of all the panel items in the footer.
          */
@@ -7524,7 +7524,7 @@ declare module AtomTypes {
          * @param {number} {Number} Determines stacking order. Lower priority items are forced closer to the edges of the window. (default: 100)
          * @returns {Panel} Returns a {Panel}
          */
-        addFooterPanel(options: { item: any, visible?: boolean, priority?: number }): Panel;
+        addFooterPanel<T>(options: { item: T, visible?: boolean, priority?: number }): Panel<T>;
         /**
          * Get an {Array} of all the modal panel items
          */
@@ -7537,14 +7537,14 @@ declare module AtomTypes {
          * @param {number} {Number} Determines stacking order. Lower priority items are forced closer to the edges of the window. (default: 100)
          * @returns {Panel} Returns a {Panel}
          */
-        addModalPanel(options: { item: any, visible?: boolean, priority?: number }): Panel;
+        addModalPanel<T>(options: { item: T, visible?: boolean, priority?: number }): Panel<T>;
         /**
          * @param  Item the panel contains
          * @returns {Panel} Returns the {Panel} associated with the given item.
          * @returns  Returns
         `null` when the item has no panel.
          */
-        panelForItem(item: any): Panel;
+        panelForItem<T>(item: T): Panel<T>;
         /**
          * Performs a search across all files in the workspace.
          * @param {RegExp} {RegExp} to search with.
