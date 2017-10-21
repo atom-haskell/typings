@@ -7,4 +7,8 @@ interface ObjectConstructor {
     entries<K extends string, T>(o: { [Key in K]: T }): [K, T][];
 }
 
+interface String {
+  trimRight(): string
+}
+
 type Maybe<T> = T | null | undefined
