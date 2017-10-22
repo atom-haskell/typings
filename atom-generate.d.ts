@@ -4320,26 +4320,26 @@ declare module AtomTypes {
         highlighting.
          * @returns {any[]} Returns an {Array} of two {Number}s: the starting row, and the ending row.
          */
-        getBufferRowRange(): any[];
+        getBufferRowRange(): [number, number];
         /**
          * Determines if the selection contains anything.
          */
-        isEmpty(): void;
+        isEmpty(): boolean;
         /**
          * Determines if the ending position of a marker is greater than the
          * starting position.
          *
          * This can happen when, for example, you highlight text "up" in a {TextBuffer}.
          */
-        isReversed(): void;
+        isReversed(): boolean;
         /**
          * @returns  Returns whether the selection is a single line or not.
          */
-        isSingleScreenLine(): any;
+        isSingleScreenLine(): boolean;
         /**
          * @returns  Returns the text in the selection.
          */
-        getText(): any;
+        getText(): string;
         /**
          * Identifies if a selection intersects with a given buffer range.
          * @param {Range} A {Range} to check against.
