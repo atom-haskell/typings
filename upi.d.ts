@@ -135,8 +135,8 @@ export interface IUPIInstance extends AtomTypes.Disposable {
   setMenu(name: string, menu: AtomTypes.AtomMenuItem[]): AtomTypes.Disposable;
   setStatus(status: IStatus): void;
   setMessages(messages: IResultItem[]): void;
-  addMessageTab(name: string, opts: ISeverityTabDefinition): void;
-  showTooltip({editor, eventType, detail, tooltip}: IShowTooltipParams): void;
+  addMessageTab(name: string, opts: ISeverityTabDefinition): Promise<void>;
+  showTooltip({editor, eventType, detail, tooltip}: IShowTooltipParams): Promise<void>;
   addPanelControl<T>(def: TControlDefinition<T>): AtomTypes.Disposable;
   addConfigParam<T>(paramName: string, spec: IParamSpec<T>): AtomTypes.CompositeDisposable;
   getConfigParam<T>(name: string): Promise<T | undefined>;

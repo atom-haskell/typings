@@ -1092,7 +1092,7 @@ declare module AtomTypes {
          * @param {any[]} {Array} of two numbers: the buffer row, and the buffer column.
          * @param {Object} {Object} with the following keys:
          */
-        setBufferPosition(bufferPosition: [number, number], options?: Object): void;
+        setBufferPosition(bufferPosition: IPoint, options?: Object): void;
         /**
          * @returns  Returns the current buffer position as an Array.
          */
@@ -4222,7 +4222,7 @@ declare module AtomTypes {
          * @returns {boolean} Returns a {Boolean} indicating whether this range contains the given
         point.
          */
-        containsPoint(point: IPoint, exclusive: any): boolean;
+        containsPoint(point: IPoint, exclusive?: boolean): boolean;
         /**
          * @param {number} Row {Number}
          * @returns {boolean} Returns a {Boolean} indicating whether this range intersects the
@@ -6605,7 +6605,7 @@ declare module AtomTypes {
          * Get current {Selection}s.
          * @returns {any[]} Returns: An {Array} of {Selection}s.
          */
-        getSelections(): any[];
+        getSelections(): Selection[];
         /**
          * Get all {Selection}s, ordered by their position in the buffer
          * instead of the order in which they were added.
