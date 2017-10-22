@@ -7296,10 +7296,14 @@ declare module AtomTypes {
          * @param {string} A {String} containing the name of the location in which this item should be opened (one of "left", "right", "bottom", or "center"). If omitted, Atom will fall back to the last location in which a user has placed an item with the same URI or, if this is a new URI, the default location specified by the item. NOTE: This option should almost always be omitted to honor user preference.
          * @returns {Promise<any>} Returns a {Promise} that resolves to the {TextEditor} for the file URI.
          */
-        open(itemOrURI?: Object | string, options?: {
+        open(itemOrURI?: any | string, options?: {
           initialLine?: number, initialColumn?: number, split?: 'left' | 'right' | 'up' | 'down',
           activatePane?: boolean, activateItem?: boolean, pending?: boolean,
           searchAllPanes?: boolean, location?: string }): Promise<any>;
+        open<T>(itemOrURI?: T | string, options?: {
+          initialLine?: number, initialColumn?: number, split?: 'left' | 'right' | 'up' | 'down',
+          activatePane?: boolean, activateItem?: boolean, pending?: boolean,
+          searchAllPanes?: boolean, location?: string }): Promise<T>;
         /**
          * Search the workspace for items matching the given URI and hide them.
          * @param {string} The item to hide or a {String} containing the URI of the item to hide.
