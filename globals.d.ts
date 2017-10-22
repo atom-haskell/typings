@@ -12,3 +12,7 @@ interface String {
 }
 
 type Maybe<T> = T | null | undefined
+
+interface NodeListOf<TNode extends Node> extends NodeList {
+  forEach(func: (elem:TNode, idx: number) => void): void
+}
