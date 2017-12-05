@@ -1,5 +1,5 @@
-declare namespace UPI {
-export namespace CompletionBackend {
+declare module 'atom-haskell-upi/completion-backend' {
+import * as AtomTypes from "atom"
 export type SymbolType = 'type' | 'class' | 'function' | 'operator' | 'tag'
 export interface ISymbol {
     qparent: string | undefined;
@@ -32,6 +32,5 @@ export interface ICompletionBackend {
     getCompletionsForLanguagePragmas(buffer: AtomTypes.TextBuffer, prefix: string, position: AtomTypes.Point): Promise<string[]>;
     getCompletionsForCompilerOptions(buffer: AtomTypes.TextBuffer, prefix: string, position: AtomTypes.Point): Promise<string[]>;
     getCompletionsForHole(buffer: AtomTypes.TextBuffer, prefix: string, position: AtomTypes.Point): Promise<ISymbol[]>;
-}
 }
 }
