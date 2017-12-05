@@ -14,14 +14,10 @@ declare module "atom-haskell-upi" {
   export interface IMessageHTML {
       html: string;
   }
-  export interface IMessageObject {
-    toHtml (linter?: boolean): string
-    raw (): string
-  }
   export type TMessage = string | IMessageText | IMessageHTML;
   export interface ITooltipData {
       range: AtomTypes.RangeCompatible;
-      text: TSingleOrArray<TMessage | IMessageObject>;
+      text: TSingleOrArray<TMessage>;
       persistent?: boolean;
   }
 
