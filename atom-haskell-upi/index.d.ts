@@ -31,7 +31,7 @@ declare module "atom-haskell-upi" {
     /** should tab auto-scroll? */
     autoScroll?: boolean
   }
-  export type TTextBufferCallback = (buffer: AtomTypes.TextBuffer) => void;
+  export type TTextBufferCallback = (buffer: AtomTypes.TextBuffer) => void | Promise<void>;
   export interface IControlSimpleDefinition {
       element: string;
       opts: IControlOpts;
