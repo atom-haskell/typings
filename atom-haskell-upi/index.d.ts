@@ -135,6 +135,15 @@ declare module 'atom-haskell-upi' {
           handler: TTooltipHandler
           eventTypes?: TEventRangeType[]
         }
+    commands?: TCommandsDefintion
+  }
+
+  export type TCommandsDefintion = {
+    [T in keyof AtomTypes.CommandRegistryTargetMap]: {
+      [key: string]: (
+        target: AtomTypes.CommandRegistryTargetMap[T],
+      ) => Promise<IResultItem[]> | Promise<undefined> | undefined
+    }
   }
 
   export interface IShowTooltipParams {
