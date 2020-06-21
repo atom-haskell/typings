@@ -142,7 +142,7 @@ declare module 'atom-haskell-upi' {
     [T in keyof AtomTypes.CommandRegistryTargetMap]: {
       [key: string]: (
         target: AtomTypes.CommandRegistryTargetMap[T],
-      ) => Promise<IResultItem[]> | Promise<undefined> | undefined
+      ) => Promise<IResultItem[] | void> | void
     }
   }
 
