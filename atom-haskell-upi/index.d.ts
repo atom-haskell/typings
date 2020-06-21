@@ -138,13 +138,15 @@ declare module 'atom-haskell-upi' {
     commands?: TCommandsDefintion
   }
 
-  export type TCommandsDefintion = {
-    [T in keyof AtomTypes.CommandRegistryTargetMap]: {
-      [key: string]: (
-        target: AtomTypes.CommandRegistryTargetMap[T],
-      ) => Promise<IResultItem[] | void> | void
-    }
+  export type TCommandHandlers<Elem> = {
+    [command: string]: (target: Elem) => Promise<IResultItem[] | void> | void
   }
+
+  export type TCommandsDefintion = {
+    [T in keyof HTMLElementTagNameMap]?: TCommandHandlers<
+      AtomTypes.CommandRegistryTargetMap[T]
+    >
+  } & { [key: string]: TCommandHandlers<any> }
 
   export interface IShowTooltipParams {
     editor: AtomTypes.TextEditor
