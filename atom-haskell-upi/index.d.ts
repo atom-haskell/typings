@@ -40,6 +40,7 @@ declare module 'atom-haskell-upi' {
     | Promise<void>
     | ReadonlyArray<IResultItem>
     | Promise<ReadonlyArray<IResultItem>>
+    | AsyncIterable<IResultItem>
   export interface IControlSimpleDefinition {
     element: string
     opts: IControlOpts
@@ -139,7 +140,7 @@ declare module 'atom-haskell-upi' {
   }
 
   export type TCommandHandlers<Elem> = {
-    [command: string]: (target: Elem) => Promise<IResultItem[] | void> | void
+    [command: string]: (target: Elem) => ReturnType<TTextBufferCallback>
   }
 
   export type TCommandsDefintion = {
