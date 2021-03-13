@@ -207,6 +207,11 @@ declare module 'atom-haskell-upi' {
     /** any context related to message, will be displayed alongside
         uri and position */
     context?: string
+    actions?: () => Promise<Action[]>
+  }
+  export interface Action {
+    title: string
+    apply: () => Promise<void>
   }
   export type TSeverity = 'error' | 'warning' | 'lint' | string
   export interface INormalStatus {
