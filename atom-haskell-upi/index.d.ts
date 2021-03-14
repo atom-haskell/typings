@@ -122,7 +122,7 @@ declare module 'atom-haskell-upi' {
     editor: AtomTypes.TextEditor,
     crange: AtomTypes.Range,
     type: TEventRangeType,
-  ) => Action | undefined | Promise<Action | undefined>
+  ) => Action[] | undefined | Promise<Action[] | undefined>
   export interface IRegistrationOptions {
     name: string
     menu?: { label: string; menu: ReadonlyArray<AtomTypes.MenuOptions> }
