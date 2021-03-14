@@ -118,6 +118,11 @@ declare module 'atom-haskell-upi' {
     crange: AtomTypes.Range,
     type: TEventRangeType,
   ) => ITooltipData | undefined | Promise<ITooltipData | undefined>
+  export type TActionHandler = (
+    editor: AtomTypes.TextEditor,
+    crange: AtomTypes.Range,
+    type: TEventRangeType,
+  ) => Action | undefined | Promise<Action | undefined>
   export interface IRegistrationOptions {
     name: string
     menu?: { label: string; menu: ReadonlyArray<AtomTypes.MenuOptions> }
@@ -134,6 +139,13 @@ declare module 'atom-haskell-upi' {
       | {
           priority?: number
           handler: TTooltipHandler
+          eventTypes?: TEventRangeType[]
+        }
+    actions?:
+      | TActionHandler
+      | {
+          priority?: number
+          handler: TActionHandler
           eventTypes?: TEventRangeType[]
         }
     commands?: TCommandsDefintion
