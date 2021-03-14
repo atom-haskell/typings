@@ -219,7 +219,6 @@ declare module 'atom-haskell-upi' {
     /** any context related to message, will be displayed alongside
         uri and position */
     context?: string
-    actions?: () => Promise<Action[]>
   }
   export interface Action {
     title: string
